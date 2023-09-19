@@ -1,6 +1,6 @@
 const http = require('http');
-const htmlHandler = require('./htmlResponses.js');
-const cssHandler = require('./cssHandler.js');
+const indexHandler = require('./indexResponses.js');
+// const cssHandler = require('./cssHandler.js');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
@@ -9,13 +9,13 @@ const onRequest = (request, response) => {
 
   switch (request.url) {
     case '/':
-      htmlHandler.getIndex(request, response);
+      indexHandler.getIndex(request, response);
       break;
-    case '/styles.css':
-      cssHandler.getStylesheet(request, response);
+    case '/style.css':
+      indexHandler.getStylesheet(request, response);
       break;
     default:
-      htmlHandler.getIndex(request, response);
+      indexHandler.getIndex(request, response);
       break;
   }
 };
