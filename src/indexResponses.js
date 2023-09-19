@@ -1,5 +1,6 @@
 const fs = require('fs');
 
+// paths to necessary files
 const index = fs.readFileSync(`${__dirname}/../client/client.html`);
 const stylesheet = fs.readFileSync(`${__dirname}/../client/style.css`);
 
@@ -17,5 +18,6 @@ const getStylesheet = (request, response) => {
   response.end();
 };
 
+// export get function
 module.exports.getIndex = getIndex;
 module.exports.getStylesheet = getStylesheet;
