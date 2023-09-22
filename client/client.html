@@ -5,7 +5,25 @@
   <link rel="stylesheet" type="text/css" href="/style.css">
   
   <script>
+    const sendFetch = async () => {
+      const url = document.getElementById('page').value;
+      const acceptedType = document.getElementById('type').value;
 
+      // call when submit is press
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Accept': acceptedType,
+        }
+      });
+    }
+
+    const init = () => {
+        const sendButton = document.getElementById('send');
+        sendButton.addEventListener('click', sendFetch);
+      }
+
+    window.onload = init;
   </script>
 </head>
 <body>
@@ -19,6 +37,7 @@
       <option value="/internal">Internal</option>
       <option value="/notImplemented">Not Implemented</option>
       <option value="/notFound">Not Found</option>
+      <option value="/gibberish">gibberish</option>
     </select>
     <select id="type">
       <option value="application/json">JSON</option>

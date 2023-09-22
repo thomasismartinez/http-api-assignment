@@ -12,7 +12,7 @@ const getIndex = (request, response) => {
 };
 
 // get index CSS
-const getStylesheet = (request, response) => {
+const getCSS = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'text/css' });
   response.write(stylesheet);
   response.end();
@@ -20,4 +20,4 @@ const getStylesheet = (request, response) => {
 
 // export get function
 module.exports.getIndex = getIndex;
-module.exports.getStylesheet = getStylesheet;
+module.exports.getCSS = getCSS;
