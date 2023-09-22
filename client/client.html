@@ -5,17 +5,46 @@
   <link rel="stylesheet" type="text/css" href="/style.css">
   
   <script>
+    const handleResponse = (response) => {
+      console.log(response);
+
+      let content = document.getElementById('content');
+      content.innerHTML = response.statusText;
+
+      response.text().then((resText) => {
+        const contentType = response.headers.get('Content-Type');
+        const messageElement = document.createElement('p');
+        messageElement.textContent = resText;
+
+        console.log(resText);
+
+        if(contentType === 'application/json') {
+          //Parse the json back into a javascript object, and display the data.
+          const parsedResponse = JSON.parse(resText);
+          messageElement.textContent = `Message: ${parsedResponse.message}`;
+        } else if (contentType === 'text/xml') { //If the server sent back xml
+          //Parse the xml into a document and select the data out.
+          const parsedResponse = new window.DOMParser().parseFromString(resText, 'text/xml');
+          messageElement.textContent = 'Message: ' + parsedResponse.querySelector('message').textContent;
+        }
+
+        content.appendChild(messageElement);
+      });
+    }
+
     const sendFetch = async () => {
       const url = document.getElementById('page').value;
       const acceptedType = document.getElementById('type').value;
 
-      // call when submit is press
+      // call when submit is pressed
       const response = await fetch(url, {
         method: 'GET',
         headers: {
           'Accept': acceptedType,
         }
       });
+
+      handleResponse(response);
     }
 
     const init = () => {
